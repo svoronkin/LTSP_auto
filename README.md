@@ -46,7 +46,7 @@ HDMI3 connected 1080x1920+0+0 left (normal left inverted right x axis y axis) 16
  - добавить scale-параметр в файле настроек (на случай, если хочется 150% масштаб, например);
  + добавить возможность открывать окно в fullscreen-режиме;  
    - done: аргумент "fullscreen::true"
- + добавить возможность логиниться не только в https://metrics.mobbtech.com, но и в https://monitor.mobbtech.com (как минимум);
+ + добавить возможность логиниться не только в https://another_url.com, но и в https://yet_another_url.com (как минимум);
    - done: аргумент "application::monitor"
  - добавить возможность выбора драйвера (не только firefox, но и chrome) для открытия окна.
 

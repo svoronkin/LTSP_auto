@@ -1,0 +1,28 @@
+dashboards:
+    grafana-firefox:
+        driver: "firefox"
+        application: "grafana"
+        x: 0
+        y: 0
+        height: 950
+        width: 1060
+        url: "https://some_URL/d/000000073/internal_billing_application?refresh=5s&orgId=1"
+        user: "grafana_dashboards"
+        password: "grafana_dashboards"
+        fullscreen: true
+        zoom: 100
+        refresh: 30
+
+    coveraga:
+        driver: "chrome"
+        application: "default"
+        x: 1080
+        y: 0
+        height: 950
+        width: 1080
+        url: "http://some_URL/deploy/"
+        user: ""
+        password: ""
+        fullscreen: false
+        zoom: 90
+        refresh: 10

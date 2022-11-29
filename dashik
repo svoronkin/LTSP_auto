@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+
+import argparse
+from time import sleep
+from dashboards.config import Config
+from dashboards.launcher import open_page
+from multiprocessing import Process
+
+
+def start_supervisor(config):
+    process_pool = list()
+    dashboards_list = list(config.dashboards)
+    for (label, params) in config.dashboards.items():
+        p = Process(target=open_page, name=label, kwargs=params, daemon=False)
+        process_pool.append((label, p))
+        p.start()
+
+    while True:
+        for (name,p) in process_pool:
+            if p.exitcode:
+                p.join(1)
+                process_pool.remove((name,p))
+        # re-start all exited processes
+        diff = list(set(dashboards_list) - set([ x[0] for x in process_pool]))
+        if diff:
+            for label in diff:
+                p = Process(target=open_page, name=label, kwargs=config.dashboards[label], daemon=False)
+                process_pool.append((label,p))
+                p.start()
+        sleep(10)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-c', '--config', action='store', dest='config_file_path', help='Path to your config.yml file')
+    args = parser.parse_args()
+    if args.config_file_path:
+      cfg = Config(args.config_file_path)
+      start_supervisor(cfg)
